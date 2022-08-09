@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:id="@+id/home">
+        <item
+            android:id="@+id/homeFragment"
+            android:title="@string/home" />
+    </group>
+
+    <group android:id="@+id/screenshots">
+        <item
+            android:id="@+id/screenshotsFragment"
+            android:title="@string/screenshots" />
+    </group>
+
+    <group android:id="@+id/settings">
+        <item
+            android:id="@+id/settingsFragment"
+            android:title="@string/settings" />
+    </group>
+
+</menu>

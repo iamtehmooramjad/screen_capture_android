@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layoutDirection="locale"
+        tools:openDrawer="start">
+
+        <include
+            android:id="@+id/app_bar_main_navigation"
+            layout="@layout/app_bar_home_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            android:layout_marginEnd="-64dp"
+            app:dividerInsetStart="30dp"
+            app:dividerInsetEnd="30dp"
+            app:itemHorizontalPadding="@dimen/_16sdp"
+            app:itemVerticalPadding="@dimen/_16sdp"
+            app:itemIconPadding="28dp"
+            app:itemIconSize="18dp"
+            app:itemTextAppearance="@style/App16SpTextViewStyle.Medium"
+            app:itemTextColor="@color/title"
+            app:headerLayout="@layout/nav_header_home_navigation"
+            app:menu="@menu/menu_home" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
