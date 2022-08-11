@@ -8,5 +8,6 @@ object Constants {
      const val STOP = "STOP"
      const val SCREENCAP_NAME = "screencap"
      const val RESULT_CODE = "RESULT_CODE"
+     const val SCREENSHOTS_FOLDER_NAME = "Private Screenshots"
 
 }

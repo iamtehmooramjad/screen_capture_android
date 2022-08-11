@@ -37,6 +37,13 @@
                 android:layout_height="wrap_content"
                 android:text="Tap record button to start taking screen shots" />
 
+            <TextView
+                android:id="@+id/count"
+                style="@style/TextAppearance.Compat.Notification.Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 Screenshots captured" />
+
         </LinearLayout>
     </LinearLayout>
 

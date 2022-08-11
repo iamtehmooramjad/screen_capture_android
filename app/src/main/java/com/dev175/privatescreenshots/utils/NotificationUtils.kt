@@ -25,7 +25,6 @@ object NotificationUtils {
         return Pair(175, notification)
     }
 
-
     private fun createNotification(context: Context): Notification {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         builder.setSmallIcon(R.drawable.ic_menu)
@@ -53,9 +52,7 @@ object NotificationUtils {
 
 
         customView.setOnClickPendingIntent(R.id.close_iv, clickPendingIntent)
-        val notification: Notification = NotificationCompat.Builder(context,
-            CHANNEL_ID
-        )
+        val notification: Notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setCustomContentView(customView)
 //            .setCustomBigContentView(expandedView)

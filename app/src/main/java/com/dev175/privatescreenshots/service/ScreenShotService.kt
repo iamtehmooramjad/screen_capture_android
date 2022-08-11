@@ -23,6 +23,7 @@ import android.view.OrientationEventListener
 import android.view.WindowManager
 import androidx.core.util.component1
 import androidx.core.util.component2
+import com.dev175.privatescreenshots.utils.Constants
 import com.dev175.privatescreenshots.utils.Constants.ACTION
 import com.dev175.privatescreenshots.utils.Constants.DATA
 import com.dev175.privatescreenshots.utils.Constants.RESULT_CODE
@@ -175,22 +176,26 @@ class ScreenShotService : Service() {
         super.onCreate()
 
         // create store dir
-//        val externalFilesDir: File? = getExternalFilesDir(null)
-//        if (externalFilesDir != null) {
-//            mStoreDir = externalFilesDir.absolutePath.toString() + "/screenshots/"
-//            Log.d(TAG, "onCreate: $mStoreDir")
-//            val storeDirectory = File(mStoreDir)
-//            if (!storeDirectory.exists()) {
-//                val success: Boolean = storeDirectory.mkdirs()
-//                if (!success) {
-//                    Log.e(TAG, "failed to create file storage directory.")
-//                    stopSelf()
-//                }
-//            }
-//        } else {
-//            Log.e(TAG, "failed to create file storage directory, getExternalFilesDir is null.")
-//            stopSelf()
-//        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+
+        }
+        else{
+
+            val imagesDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    .toString()+"/"+Constants.SCREENSHOTS_FOLDER_NAME
+                val storeDirectory = File(imagesDir)
+                if (!storeDirectory.exists()) {
+                    val success: Boolean = storeDirectory.mkdirs()
+                    if (!success) {
+                        Log.e(TAG, "failed to create file storage directory.")
+                        stopSelf()
+                    }
+                }
+
+        }
+
 
         // start capture handling thread
         object : Thread() {
@@ -254,16 +259,19 @@ class ScreenShotService : Service() {
             val values = ContentValues()
             values.put(MediaStore.Images.Media.DISPLAY_NAME, name)
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-            values.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            values.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES+"/"+Constants.SCREENSHOTS_FOLDER_NAME)
             val uri: Uri? =
                 contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             uri?.let {
                imageOutStream = contentResolver.openOutputStream(it)
             }
+             Log.d(TAG, "saveImageToStorage: if $uri")
         } else {
             val imagesDir =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                    .toString()
+                    .toString()+"/"+Constants.SCREENSHOTS_FOLDER_NAME
+
+             Log.d(TAG, "saveImageToStorage: else $imagesDir")
             val image = File(imagesDir, name)
             imageOutStream = FileOutputStream(image)
         }
