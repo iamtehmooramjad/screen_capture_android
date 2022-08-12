@@ -11,7 +11,7 @@
     <fragment
         android:id="@+id/screenshotsFragment"
         android:name="com.dev175.privatescreenshots.ui.screenshots.ScreenshotsFragment"
-        android:label="ScreenshotsFragment" />
+        android:label="Screenshots" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.dev175.privatescreenshots.ui.settings.SettingsFragment"

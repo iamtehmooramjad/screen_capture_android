@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/Learn/app/src/main/res/drawable/bg_transparent.xml" value="0.188" />
+        <entry key="..\:/AndroidProjects/Learn/app/src/main/res/layout/fragment_screenshots.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/Learn/app/src/main/res/layout/item_image.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_back_arrow.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_close.xml" value="0.161" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_down_arrow_dark.xml" value="0.1" />

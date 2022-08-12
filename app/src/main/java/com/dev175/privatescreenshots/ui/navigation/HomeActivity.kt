@@ -22,8 +22,9 @@ import com.dev175.privatescreenshots.receiver.NotificationReceiver
 import com.dev175.privatescreenshots.ui.base.BaseActivity
 import com.dev175.privatescreenshots.utils.fadeVisibility
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

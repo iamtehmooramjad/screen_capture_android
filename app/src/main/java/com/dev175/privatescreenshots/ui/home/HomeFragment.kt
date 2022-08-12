@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context.MEDIA_PROJECTION_SERVICE
 import android.content.Intent
 import android.media.projection.MediaProjectionManager
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.NotificationCompat

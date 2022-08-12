@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="data"
+            type="com.dev175.privatescreenshots.model.Screenshot" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        bind:cardCornerRadius="0dp"
+        android:padding="0dp"
+        bind:strokeColor="@color/dark_grey"
+        bind:strokeWidth="1dp"
+       >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+           >
+
+            <ImageView
+                android:id="@+id/ivGalleryImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_360sdp"
+                android:background="@color/grey"
+                android:scaleType="centerCrop"
+                bind:imageBitmap="@{data.thumbnail}"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/overlay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_360sdp"
+                android:scaleType="centerCrop"
+                android:elevation="10dp"
+                android:background="@drawable/bg_transparent"
+                android:visibility="@{data.checked?View.VISIBLE : View.GONE,default=gone}"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
