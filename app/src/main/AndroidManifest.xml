@@ -25,6 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.screenshots.ScreenshotsActivity" />
+        <activity android:name=".ui.settings.SettingsActivity" />
         <receiver android:name=".receiver.NotificationReceiver"/>
         <service
             android:name=".service.ScreenShotService"

@@ -6,6 +6,7 @@
         <entry key="..\:/AndroidProjects/Learn/app/src/main/res/drawable/bg_transparent.xml" value="0.188" />
         <entry key="..\:/AndroidProjects/Learn/app/src/main/res/layout/fragment_screenshots.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/Learn/app/src/main/res/layout/item_image.xml" value="0.264" />
+        <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/btn_start_stop.xml" value="0.2055" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_back_arrow.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_close.xml" value="0.161" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_down_arrow_dark.xml" value="0.1" />
@@ -14,7 +15,10 @@
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_record.xml" value="0.161" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_record_red.xml" value="0.161" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_settings.xml" value="0.161" />
+        <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/drawable/ic_stop.xml" value="0.174" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/activity_home.xml" value="0.13148148148148148" />
+        <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/activity_screenshots.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/activity_settings.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/app_bar_home_navigation.xml" value="0.13148148148148148" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/content_main_navigation.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/fragment_home.xml" value="0.22" />
@@ -23,7 +27,7 @@
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/nav_header_home_navigation.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/notification_collapsed.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/notification_expanded.xml" value="0.25" />
-        <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/notification_record.xml" value="0.5" />
+        <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/layout/notification_record.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/PrivateScreenShots/app/src/main/res/menu/menu_home.xml" value="0.2" />
       </map>
     </option>

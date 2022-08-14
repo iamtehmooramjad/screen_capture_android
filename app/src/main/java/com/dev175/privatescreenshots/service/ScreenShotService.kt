@@ -42,7 +42,6 @@ import java.util.*
 class ScreenShotService : Service() {
 
     private val TAG = "ScreenShotService"
-    private var mMediaProjection: MediaProjection? = null
     private var mImageReader: ImageReader? = null
     private var mHandler: Handler? = null
     private var mDisplay: Display? = null
@@ -54,9 +53,13 @@ class ScreenShotService : Service() {
     private var mOrientationChangeCallback: OrientationChangeCallback? = null
 
     companion object{
+        private var mMediaProjection: MediaProjection? = null
 
         var IMAGES_PRODUCED = 0
 
+        fun isMediaProjectionRunning() : Boolean{
+           return mMediaProjection!=null
+        }
 
         fun getStartIntent(context: Context?, resultCode: Int, data: Intent?): Intent {
             val intent = Intent(context, ScreenShotService::class.java)
@@ -165,7 +168,7 @@ class ScreenShotService : Service() {
 
         // start capture reader
         mImageReader = ImageReader.newInstance(mWidth, mHeight, PixelFormat.RGBA_8888, 2)
-        mVirtualDisplay = mMediaProjection!!.createVirtualDisplay(
+        mVirtualDisplay = mMediaProjection?.createVirtualDisplay(
             SCREENCAP_NAME, mWidth, mHeight,
             mDensity, getVirtualDisplayFlags(), mImageReader?.surface, null, mHandler
         )
@@ -190,6 +193,7 @@ class ScreenShotService : Service() {
                     val success: Boolean = storeDirectory.mkdirs()
                     if (!success) {
                         Log.e(TAG, "failed to create file storage directory.")
+                        stopForeground(true)
                         stopSelf()
                     }
                 }
@@ -245,8 +249,10 @@ class ScreenShotService : Service() {
             startProjection(resultCode, data!!)
         } else if (isStopCommand(intent)) {
             stopProjection()
+            stopForeground(true)
             stopSelf()
         } else {
+            stopForeground(true)
             stopSelf()
         }
         return START_NOT_STICKY
@@ -283,6 +289,8 @@ class ScreenShotService : Service() {
             )
         } finally {
             imageOutStream?.close()
+            IMAGES_PRODUCED.plus(1)
+
         }
     }
 
@@ -290,7 +298,8 @@ class ScreenShotService : Service() {
         mHandler?.let {
             it.post {
                 if (mMediaProjection != null) {
-                    mMediaProjection?.stop();
+                    mMediaProjection?.stop()
+                    mMediaProjection = null
                 }
             }
         }

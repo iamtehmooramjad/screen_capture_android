@@ -1,9 +1,9 @@
 package com.dev175.privatescreenshots.ui.screenshots
 
 import com.dev175.privatescreenshots.R
-import com.dev175.privatescreenshots.databinding.FragmentScreenshotsBinding
+import com.dev175.privatescreenshots.databinding.ActivityScreenshotsBinding
 import com.dev175.privatescreenshots.model.Screenshot
-import com.dev175.privatescreenshots.ui.base.BaseFragment
+import com.dev175.privatescreenshots.ui.base.BaseActivity
 import com.dev175.privatescreenshots.utils.ImageUtils.getAllImages
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ScreenshotsFragment  : BaseFragment<FragmentScreenshotsBinding>(R.layout.fragment_screenshots) {
+class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.activity_screenshots) {
 
     @Inject
     lateinit var adapter: ScreenshotsAdapter
@@ -21,11 +21,15 @@ class ScreenshotsFragment  : BaseFragment<FragmentScreenshotsBinding>(R.layout.f
         super.initUi()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val images = getAllImages(requireContext())
+            val images = getAllImages(context)
 
             CoroutineScope(Dispatchers.Main).launch {
                 setRecyclerView(images)
             }
+        }
+
+        bindings.ivBack.setOnClickListener {
+            onBackPressed()
         }
     }
 

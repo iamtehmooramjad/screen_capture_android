@@ -1,12 +1,7 @@
 package com.dev175.privatescreenshots.ui.navigation
 
-import android.app.Notification
-import android.app.PendingIntent
 import android.content.Intent
 import android.view.View
-import android.widget.RemoteViews
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -16,9 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.dev175.privatescreenshots.R
-import com.dev175.privatescreenshots.ScreenshotApplication.Companion.CHANNEL_ID
 import com.dev175.privatescreenshots.databinding.ActivityHomeBinding
-import com.dev175.privatescreenshots.receiver.NotificationReceiver
 import com.dev175.privatescreenshots.ui.base.BaseActivity
 import com.dev175.privatescreenshots.utils.fadeVisibility
 import com.google.android.material.navigation.NavigationView
@@ -47,8 +40,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.homeFragment,
-                R.id.screenshotsFragment,
-                R.id.settingsFragment
+                R.id.screenshotsActivity,
+                R.id.settingsActivity
             ), drawerLayout
         )
 
@@ -60,12 +53,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             bindings.appBarMainNavigation.tvToolbarTitle.text = destination.label
 
-            if (destination.id == R.id.screenshotsFragment ||
-                destination.id == R.id.settingsFragment
-
+            if (destination.id == R.id.homeFragment
             ) {
-                bindings.appBarMainNavigation.toolbar.fadeVisibility(View.VISIBLE)
-            } else {
                 bindings.appBarMainNavigation.toolbar.fadeVisibility(View.GONE,0)
             }
 

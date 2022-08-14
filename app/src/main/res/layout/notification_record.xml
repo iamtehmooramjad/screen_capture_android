@@ -53,10 +53,10 @@
         android:orientation="horizontal"
         android:paddingVertical="@dimen/_8sdp">
         <ImageButton
-            android:id="@+id/record_iv"
+            android:id="@+id/start_stop_iv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_record"
+            android:src="@drawable/ic_start"
             android:scaleType="fitCenter"
             android:background="@color/white"
             android:layout_weight="1"/>

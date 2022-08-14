@@ -12,7 +12,7 @@
 
     <group android:id="@+id/screenshots">
         <item
-            android:id="@+id/screenshotsFragment"
+            android:id="@+id/screenshotsActivity"
             android:title="@string/screenshots" />
     </group>
 

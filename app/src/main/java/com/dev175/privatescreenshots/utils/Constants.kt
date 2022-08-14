@@ -10,4 +10,9 @@ object Constants {
      const val RESULT_CODE = "RESULT_CODE"
      const val SCREENSHOTS_FOLDER_NAME = "Private Screenshots"
 
+     //For Notification
+     const val ACTION_START = "ACTION_START"
+     const val ACTION_START_STOP = "ACTION_START_STOP"
+     const val ACTION_STOP = "ACTION_STOP"
+     const val ACTION_GALLERY = "ACTION_GALLERY"
 }
