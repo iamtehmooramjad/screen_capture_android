@@ -22,9 +22,8 @@ class NotificationReceiver : BroadcastReceiver(){
                 context?.startService(ScreenShotService.getStopIntent(context))
             }
             ACTION_START_STOP->{
-                val isRunning = isMediaProjectionRunning()
 
-                if(isRunning){
+                if(isMediaProjectionRunning){
                   context?.showShortToast("isRunning true")
                     NotificationUtils.updateNotification(context,R.drawable.ic_stop)
                 }

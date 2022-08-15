@@ -56,10 +56,7 @@ class ScreenShotService : Service() {
         private var mMediaProjection: MediaProjection? = null
 
         var IMAGES_PRODUCED = 0
-
-        fun isMediaProjectionRunning() : Boolean{
-           return mMediaProjection!=null
-        }
+        var isMediaProjectionRunning = false
 
         fun getStartIntent(context: Context?, resultCode: Int, data: Intent?): Intent {
             val intent = Intent(context, ScreenShotService::class.java)
@@ -215,26 +212,31 @@ class ScreenShotService : Service() {
         val mpManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
         if (mMediaProjection == null) {
             mMediaProjection = mpManager.getMediaProjection(resultCode, data)
-            if (mMediaProjection != null) {
-                // display metrics
-                mDensity = Resources.getSystem().displayMetrics.densityDpi
-                val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
-                mDisplay = windowManager.defaultDisplay
+//            startMediaProjection()
+        }
+    }
 
-                // create virtual display depending on device width / height
-                createVirtualDisplay()
+     fun startMediaProjection() {
+        if (mMediaProjection != null) {
+            isMediaProjectionRunning = true
+            // display metrics
+            mDensity = Resources.getSystem().displayMetrics.densityDpi
+            val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+            mDisplay = windowManager.defaultDisplay
 
-                // register orientation change callback
-                mOrientationChangeCallback = OrientationChangeCallback(this)
-                mOrientationChangeCallback?.let {
-                    if (it.canDetectOrientation()) {
-                        it.enable()
-                    }
+            // create virtual display depending on device width / height
+            createVirtualDisplay()
+
+            // register orientation change callback
+            mOrientationChangeCallback = OrientationChangeCallback(this)
+            mOrientationChangeCallback?.let {
+                if (it.canDetectOrientation()) {
+                    it.enable()
                 }
-
-                // register media projection stop callback
-                mMediaProjection?.registerCallback(MediaProjectionStopCallback(), mHandler)
             }
+
+            // register media projection stop callback
+            mMediaProjection?.registerCallback(MediaProjectionStopCallback(), mHandler)
         }
     }
 
@@ -300,6 +302,7 @@ class ScreenShotService : Service() {
                 if (mMediaProjection != null) {
                     mMediaProjection?.stop()
                     mMediaProjection = null
+                    isMediaProjectionRunning = false
                 }
             }
         }
