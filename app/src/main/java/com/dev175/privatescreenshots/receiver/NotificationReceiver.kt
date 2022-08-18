@@ -18,6 +18,7 @@ class NotificationReceiver : BroadcastReceiver(){
     override fun onReceive(context: Context?, intent: Intent?) {
 
         when(intent?.action){
+
             ACTION_STOP->{
                 context?.startService(ScreenShotService.getStopIntent(context))
             }
@@ -35,7 +36,6 @@ class NotificationReceiver : BroadcastReceiver(){
             }
             ACTION_GALLERY->{
                 context?.startService(ScreenShotService.getStopIntent(context))
-
             }
 
         }

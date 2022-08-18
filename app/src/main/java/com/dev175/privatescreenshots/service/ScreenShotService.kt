@@ -66,7 +66,6 @@ class ScreenShotService : Service() {
             return intent
         }
 
-
         fun getStopIntent(context: Context?): Intent {
             val intent = Intent(context, ScreenShotService::class.java)
             intent.putExtra(ACTION, STOP)

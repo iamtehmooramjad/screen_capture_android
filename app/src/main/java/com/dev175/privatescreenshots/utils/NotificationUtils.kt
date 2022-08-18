@@ -49,7 +49,7 @@ object NotificationUtils {
         remoteViews?.setOnClickPendingIntent(R.id.gallery_iv, pendingGalleryIntent)
 
         notification= NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.mipmap.ic_launcher_round)
             .setCustomContentView(remoteViews)
             .build()
         notification?.let {

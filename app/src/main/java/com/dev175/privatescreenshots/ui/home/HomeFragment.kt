@@ -44,13 +44,11 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) 
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             context?.startService(ScreenShotService.getStartIntent(requireContext(),result.resultCode,data))
-
         }
     }
 
     private fun startProjection() {
         val mProjectionManager = context?.getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
         resultLauncherForProjection.launch(mProjectionManager.createScreenCaptureIntent())
-
     }
 }
