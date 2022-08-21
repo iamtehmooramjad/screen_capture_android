@@ -1,6 +1,8 @@
 package com.dev175.privatescreenshots.ui.navigation
 
 import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,6 +16,7 @@ import com.dev175.privatescreenshots.R
 import com.dev175.privatescreenshots.databinding.ActivityHomeBinding
 import com.dev175.privatescreenshots.ui.base.BaseActivity
 import com.dev175.privatescreenshots.utils.fadeVisibility
+import com.dev175.privatescreenshots.utils.showShortToast
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,7 +53,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         bindings.appBarMainNavigation.ivBack.setOnClickListener {
             navController.navigateUp()
         }
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             bindings.appBarMainNavigation.tvToolbarTitle.text = destination.label
 
             if (destination.id == R.id.homeFragment
@@ -60,7 +63,18 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
 
         }
-
+/*
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.shareAppLink->{
+                    shareAppLink()
+                }
+                R.id.appPrivacyPolicy->{
+                    showShortToast("Privacy Policy")
+                }
+            }
+            return@setNavigationItemSelectedListener false
+        }*/
 
     }
 
@@ -82,13 +96,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     }
 
     private fun shareAppLink() {
-        val shareString = "https://play.google.com/store/apps/details?id=${application.packageName}"
+        val shareMessage = getString(R.string.share_message)+application.packageName
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
-        sendIntent.putExtra(Intent.EXTRA_TEXT, shareString)
+        sendIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
         sendIntent.type = "text/plain"
         startActivity(sendIntent)
     }
+
 
 
 

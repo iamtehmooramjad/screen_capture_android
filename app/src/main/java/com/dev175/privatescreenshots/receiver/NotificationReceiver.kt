@@ -20,19 +20,21 @@ class NotificationReceiver : BroadcastReceiver(){
         when(intent?.action){
 
             ACTION_STOP->{
+                //Stop Service
                 context?.startService(ScreenShotService.getStopIntent(context))
             }
             ACTION_START_STOP->{
-
                 if(isMediaProjectionRunning){
                   context?.showShortToast("isRunning true")
                     NotificationUtils.updateNotification(context,R.drawable.ic_stop)
+                    context?.startService(ScreenShotService.getStopProjection(context))
+
                 }
                 else {
                     context?.showShortToast("isRunning false")
                     NotificationUtils.updateNotification(context,R.drawable.ic_start)
+                    context?.startService(ScreenShotService.getStartProjection(context))
                 }
-
             }
             ACTION_GALLERY->{
                 context?.startService(ScreenShotService.getStopIntent(context))

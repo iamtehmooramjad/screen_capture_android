@@ -12,7 +12,9 @@
         android:layout_width="@dimen/_69sdp"
         android:layout_height="@dimen/_69sdp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@mipmap/ic_launcher_round"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/dark_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,18 +24,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginVertical="@dimen/_18sdp"
         android:fontFamily="@font/mont_bold"
-        android:text="Tehmoor"
+        android:text="@string/screen_capture"
         android:textColor="@color/text_color1"
         android:textSize="18sp"
-        android:layout_marginTop="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image" />
 
 
 
-    <View
+<!--    <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
@@ -43,5 +46,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/name" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

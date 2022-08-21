@@ -37,5 +37,9 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
         adapter.items = images.toMutableList()
 
         bindings.rvGallery.adapter = adapter
+
+        adapter.listener = {view, item, position ->
+
+        }
     }
 }

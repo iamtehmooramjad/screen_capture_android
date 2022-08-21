@@ -25,11 +25,14 @@ import androidx.core.util.component1
 import androidx.core.util.component2
 import com.dev175.privatescreenshots.utils.Constants
 import com.dev175.privatescreenshots.utils.Constants.ACTION
+import com.dev175.privatescreenshots.utils.Constants.ACTION_START_STOP
 import com.dev175.privatescreenshots.utils.Constants.DATA
 import com.dev175.privatescreenshots.utils.Constants.RESULT_CODE
 import com.dev175.privatescreenshots.utils.Constants.SCREENCAP_NAME
 import com.dev175.privatescreenshots.utils.Constants.START
+import com.dev175.privatescreenshots.utils.Constants.START_PROJECTION
 import com.dev175.privatescreenshots.utils.Constants.STOP
+import com.dev175.privatescreenshots.utils.Constants.STOP_PROJECTION
 import com.dev175.privatescreenshots.utils.NotificationUtils
 import com.dev175.privatescreenshots.utils.getFileName
 import java.io.File
@@ -58,6 +61,8 @@ class ScreenShotService : Service() {
         var IMAGES_PRODUCED = 0
         var isMediaProjectionRunning = false
 
+
+        //To Start Service,and show notification and initialize media projection only
         fun getStartIntent(context: Context?, resultCode: Int, data: Intent?): Intent {
             val intent = Intent(context, ScreenShotService::class.java)
             intent.putExtra(RESULT_CODE, resultCode)
@@ -66,10 +71,37 @@ class ScreenShotService : Service() {
             return intent
         }
 
+
+        //To Stop Service
         fun getStopIntent(context: Context?): Intent {
             val intent = Intent(context, ScreenShotService::class.java)
             intent.putExtra(ACTION, STOP)
             return intent
+        }
+
+        //To Start Media Projection
+        fun getStartProjection(context: Context?):Intent{
+            val intent = Intent(context, ScreenShotService::class.java)
+            intent.putExtra(ACTION, START_PROJECTION)
+            return intent
+        }
+
+        //To Stop Media Projection
+        fun getStopProjection(context: Context?):Intent{
+            val intent = Intent(context, ScreenShotService::class.java)
+            intent.putExtra(ACTION, STOP_PROJECTION)
+            return intent
+        }
+
+        private fun isStartProjection(intent: Intent):Boolean{
+            return intent.hasExtra(ACTION) && Objects.equals(intent.getStringExtra(ACTION),
+                START_PROJECTION)
+        }
+
+
+        private fun isStopProjection(intent: Intent):Boolean{
+            return intent.hasExtra(ACTION) && Objects.equals(intent.getStringExtra(ACTION),
+                STOP_PROJECTION)
         }
 
         private fun isStartCommand(intent: Intent): Boolean {
@@ -215,7 +247,7 @@ class ScreenShotService : Service() {
         }
     }
 
-     fun startMediaProjection() {
+     private fun startMediaProjection() {
         if (mMediaProjection != null) {
             isMediaProjectionRunning = true
             // display metrics
@@ -248,7 +280,15 @@ class ScreenShotService : Service() {
             val resultCode = intent.getIntExtra(RESULT_CODE, Activity.RESULT_CANCELED)
             val data = intent.getParcelableExtra<Intent>(DATA)
             startProjection(resultCode, data!!)
-        } else if (isStopCommand(intent)) {
+        }
+        else if (isStartProjection(intent)){
+            startMediaProjection()
+        }
+        else if (isStopProjection(intent)){
+            stopProjection()
+        }
+
+        else if (isStopCommand(intent)) {
             stopProjection()
             stopForeground(true)
             stopSelf()
