@@ -6,12 +6,12 @@ object Constants {
      const val ACTION = "ACTION"
      const val START = "START"
      const val STOP = "STOP"
+     const val IMAGE = "IMAGE"
      const val SCREENCAP_NAME = "screencap"
      const val RESULT_CODE = "RESULT_CODE"
      const val SCREENSHOTS_FOLDER_NAME = "Private Screenshots"
 
      //For Notification
-     const val ACTION_START = "ACTION_START"
      const val ACTION_START_STOP = "ACTION_START_STOP"
      const val ACTION_STOP = "ACTION_STOP"
      const val ACTION_GALLERY = "ACTION_GALLERY"

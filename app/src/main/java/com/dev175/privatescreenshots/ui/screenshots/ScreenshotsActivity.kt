@@ -1,9 +1,12 @@
 package com.dev175.privatescreenshots.ui.screenshots
 
+import android.content.Intent
 import com.dev175.privatescreenshots.R
 import com.dev175.privatescreenshots.databinding.ActivityScreenshotsBinding
 import com.dev175.privatescreenshots.model.Screenshot
 import com.dev175.privatescreenshots.ui.base.BaseActivity
+import com.dev175.privatescreenshots.ui.image.ImageActivity
+import com.dev175.privatescreenshots.utils.Constants
 import com.dev175.privatescreenshots.utils.ImageUtils.getAllImages
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -38,8 +41,10 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
 
         bindings.rvGallery.adapter = adapter
 
-        adapter.listener = {view, item, position ->
-
+        adapter.listener = {_, item, _ ->
+            val intent = Intent(this,ImageActivity::class.java)
+            intent.putExtra(Constants.IMAGE,item)
+            startActivity(intent)
         }
     }
 }

@@ -51,6 +51,7 @@ object NotificationUtils {
         notification= NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher_round)
             .setCustomContentView(remoteViews)
+            .setOnlyAlertOnce(true)
             .build()
         notification?.let {
             notificationManager.notify(NOTIFICATION_ID, it)

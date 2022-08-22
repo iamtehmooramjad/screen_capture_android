@@ -33,7 +33,7 @@
                 android:layout_height="@dimen/_360sdp"
                 android:background="@color/grey"
                 android:scaleType="centerCrop"
-                bind:imageBitmap="@{data.thumbnail}"
+                bind:imageUri="@{data.uri}"
                 bind:layout_constraintBottom_toBottomOf="parent"
                 bind:layout_constraintEnd_toEndOf="parent"
                 bind:layout_constraintStart_toStartOf="parent"

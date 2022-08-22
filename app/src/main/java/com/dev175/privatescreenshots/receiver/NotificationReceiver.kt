@@ -26,13 +26,13 @@ class NotificationReceiver : BroadcastReceiver(){
             ACTION_START_STOP->{
                 if(isMediaProjectionRunning){
                   context?.showShortToast("isRunning true")
-                    NotificationUtils.updateNotification(context,R.drawable.ic_stop)
+                    NotificationUtils.updateNotification(context,R.drawable.ic_start)
                     context?.startService(ScreenShotService.getStopProjection(context))
 
                 }
                 else {
                     context?.showShortToast("isRunning false")
-                    NotificationUtils.updateNotification(context,R.drawable.ic_start)
+                    NotificationUtils.updateNotification(context,R.drawable.ic_stop)
                     context?.startService(ScreenShotService.getStartProjection(context))
                 }
             }

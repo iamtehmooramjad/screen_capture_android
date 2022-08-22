@@ -54,6 +54,8 @@ class ScreenShotService : Service() {
     private var mHeight = 0
     private var mRotation = 0
     private var mOrientationChangeCallback: OrientationChangeCallback? = null
+    private var resultCode:Int?=null
+    private var data:Intent?=null
 
     companion object{
         private var mMediaProjection: MediaProjection? = null
@@ -136,7 +138,7 @@ class ScreenShotService : Service() {
                     // re-create virtual display depending on device width / height
                     createVirtualDisplay()
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    Log.e(TAG, "onOrientationChanged: ",e)
                 }
             }
         }
@@ -185,8 +187,14 @@ class ScreenShotService : Service() {
                 mImageReader?.setOnImageAvailableListener(null, null)
                 mOrientationChangeCallback?.disable()
                 mMediaProjection?.unregisterCallback(this@MediaProjectionStopCallback)
+                IMAGES_PRODUCED = 0
+
+                mMediaProjection = null
+                isMediaProjectionRunning = false
+
             }
         }
+
     }
 
     private fun createVirtualDisplay() {
@@ -242,14 +250,19 @@ class ScreenShotService : Service() {
     private fun startProjection(resultCode: Int, data: Intent) {
         val mpManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
         if (mMediaProjection == null) {
+            this.resultCode = resultCode
+            this.data = data
             mMediaProjection = mpManager.getMediaProjection(resultCode, data)
 //            startMediaProjection()
         }
     }
 
      private fun startMediaProjection() {
+         val mpManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+         if (mMediaProjection==null && resultCode!=null && data!=null){
+             mMediaProjection = mpManager.getMediaProjection(resultCode!!, data!!)
+         }
         if (mMediaProjection != null) {
-            isMediaProjectionRunning = true
             // display metrics
             mDensity = Resources.getSystem().displayMetrics.densityDpi
             val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
@@ -268,6 +281,8 @@ class ScreenShotService : Service() {
 
             // register media projection stop callback
             mMediaProjection?.registerCallback(MediaProjectionStopCallback(), mHandler)
+
+            isMediaProjectionRunning = true
         }
     }
 
@@ -287,7 +302,6 @@ class ScreenShotService : Service() {
         else if (isStopProjection(intent)){
             stopProjection()
         }
-
         else if (isStopCommand(intent)) {
             stopProjection()
             stopForeground(true)
@@ -330,7 +344,8 @@ class ScreenShotService : Service() {
             )
         } finally {
             imageOutStream?.close()
-            IMAGES_PRODUCED.plus(1)
+            IMAGES_PRODUCED += 1
+            Log.d(TAG, "saveImageToStorage: $IMAGES_PRODUCED")
 
         }
     }
@@ -340,12 +355,11 @@ class ScreenShotService : Service() {
             it.post {
                 if (mMediaProjection != null) {
                     mMediaProjection?.stop()
-                    mMediaProjection = null
-                    isMediaProjectionRunning = false
                 }
             }
         }
     }
+
 
 
 }

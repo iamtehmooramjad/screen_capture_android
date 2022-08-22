@@ -16,4 +16,9 @@
         android:id="@+id/settingsActivity"
         android:name="com.dev175.privatescreenshots.ui.settings.SettingsActivity"
         android:label="Settings" />
+    <activity
+        android:id="@+id/imageActivity"
+        android:name="com.dev175.privatescreenshots.ui.image.ImageActivity"
+        android:label="Image" />
+
 </navigation>
