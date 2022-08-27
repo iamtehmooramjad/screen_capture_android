@@ -12,6 +12,6 @@ data class Screenshot(
     val size : String,
     val date : String,
     val uri : Uri,
-    val thumbnail : Bitmap,
+//    val thumbnail : Bitmap,
     var checked:Boolean = false
 ):Parcelable

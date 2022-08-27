@@ -16,16 +16,6 @@ import kotlinx.coroutines.launch
 
 object ImageUtils {
 
-    fun getImagesFromFolder(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-        } else {
-            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                .toString()+"/"+Constants.SCREENSHOTS_FOLDER_NAME
-
-        }
-    }
-
      fun getAllImages(context: Context): List<Screenshot> {
 
         val imageProjection = arrayOf(
@@ -37,13 +27,19 @@ object ImageUtils {
 
         val imageSortOrder = "${MediaStore.Images.Media.DATE_TAKEN} DESC"
 
-        val cursor = context.contentResolver.query(
+/*        val cursor = context.contentResolver.query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             imageProjection,
             null,
             null,
             imageSortOrder
-        )
+        )*/
+
+         val cursor = context.contentResolver.query( MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+             imageProjection,
+             MediaStore.Images.Media.DATA + " like ? ",
+             arrayOf("%/${Constants.SCREENSHOTS_FOLDER_NAME}/%"),
+             imageSortOrder);
 
         cursor.use {
             it?.let {
@@ -66,9 +62,9 @@ object ImageUtils {
                     )
                     // add the URI to the list
                     // generate the thumbnail
-                    val thumbnail: Bitmap = context.contentResolver.loadThumbnail(contentUri, Size(480, 480), null)
+//                    val thumbnail: Bitmap = context.contentResolver.loadThumbnail(contentUri, Size(480, 480), null)
 
-                    val screenshot = Screenshot(id,name,size,date?:"",contentUri,thumbnail)
+                    val screenshot = Screenshot(id,name,size,date?:"",contentUri)
                     screenshots.add(screenshot)
                 }
                 return screenshots

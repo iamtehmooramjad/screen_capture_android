@@ -23,6 +23,7 @@ import android.view.OrientationEventListener
 import android.view.WindowManager
 import androidx.core.util.component1
 import androidx.core.util.component2
+import com.dev175.privatescreenshots.receiver.NotificationReceiver
 import com.dev175.privatescreenshots.utils.Constants
 import com.dev175.privatescreenshots.utils.Constants.ACTION
 import com.dev175.privatescreenshots.utils.Constants.ACTION_START_STOP
@@ -35,6 +36,10 @@ import com.dev175.privatescreenshots.utils.Constants.STOP
 import com.dev175.privatescreenshots.utils.Constants.STOP_PROJECTION
 import com.dev175.privatescreenshots.utils.NotificationUtils
 import com.dev175.privatescreenshots.utils.getFileName
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -345,9 +350,16 @@ class ScreenShotService : Service() {
         } finally {
             imageOutStream?.close()
             IMAGES_PRODUCED += 1
+            updateNotificationScreenshotCount()
             Log.d(TAG, "saveImageToStorage: $IMAGES_PRODUCED")
-
         }
+    }
+
+    private fun updateNotificationScreenshotCount() {
+        val intent = Intent(this,NotificationReceiver::class.java)
+        intent.action = Constants.ACTION_COUNT
+        intent.putExtra(Constants.COUNT, IMAGES_PRODUCED)
+        sendBroadcast(intent)
     }
 
     private fun stopProjection(){

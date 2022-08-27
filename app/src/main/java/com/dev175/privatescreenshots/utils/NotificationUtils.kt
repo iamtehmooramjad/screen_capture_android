@@ -52,6 +52,7 @@ object NotificationUtils {
             .setSmallIcon(R.mipmap.ic_launcher_round)
             .setCustomContentView(remoteViews)
             .setOnlyAlertOnce(true)
+            .setOngoing(true)
             .build()
         notification?.let {
             notificationManager.notify(NOTIFICATION_ID, it)
@@ -60,7 +61,7 @@ object NotificationUtils {
     }
 
 
-    // use this method to update the Notification's UI
+    // use this method to update the Notification's Start Stop Icon
      fun updateNotification(context:Context?,drawable:Int) {
         val  notificationManager = NotificationManagerCompat.from(context!!)
 
@@ -79,6 +80,21 @@ object NotificationUtils {
         }
 
     }
+
+    // use this method to update the Notification's Start Stop Icon
+    fun updateNotificationCount(context:Context?,count:Int) {
+        context?.let {
+            val  notificationManager = NotificationManagerCompat.from(it)
+            remoteViews?.setTextViewText(R.id.count, "$count ${it.resources.getString(R.string.screen_capture)}")
+
+            notification?.let {n->
+                notificationManager.notify(NOTIFICATION_ID, n)
+            }
+        }
+
+
+    }
+
 
 
 }
