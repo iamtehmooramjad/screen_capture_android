@@ -26,7 +26,6 @@ import androidx.core.util.component2
 import com.dev175.privatescreenshots.receiver.NotificationReceiver
 import com.dev175.privatescreenshots.utils.Constants
 import com.dev175.privatescreenshots.utils.Constants.ACTION
-import com.dev175.privatescreenshots.utils.Constants.ACTION_START_STOP
 import com.dev175.privatescreenshots.utils.Constants.DATA
 import com.dev175.privatescreenshots.utils.Constants.RESULT_CODE
 import com.dev175.privatescreenshots.utils.Constants.SCREENCAP_NAME
@@ -34,12 +33,9 @@ import com.dev175.privatescreenshots.utils.Constants.START
 import com.dev175.privatescreenshots.utils.Constants.START_PROJECTION
 import com.dev175.privatescreenshots.utils.Constants.STOP
 import com.dev175.privatescreenshots.utils.Constants.STOP_PROJECTION
+import com.dev175.privatescreenshots.utils.Constants.TIME_IN_MILLIS_FOR_SCREENSHOT_DELAY
 import com.dev175.privatescreenshots.utils.NotificationUtils
 import com.dev175.privatescreenshots.utils.getFileName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -152,9 +148,10 @@ class ScreenShotService : Service() {
     inner class ImageAvailableListener : ImageReader.OnImageAvailableListener{
 
         override fun onImageAvailable(reader: ImageReader?) {
+            Thread.sleep(TIME_IN_MILLIS_FOR_SCREENSHOT_DELAY)
             var bitmap: Bitmap? = null
             try {
-                mImageReader!!.acquireLatestImage().use { image ->
+                mImageReader?.acquireLatestImage().use { image ->
                     if (image != null) {
                         val planes: Array<Image.Plane> = image.planes
                         val buffer: ByteBuffer = planes[0].buffer
@@ -172,7 +169,6 @@ class ScreenShotService : Service() {
 
                         // write bitmap to a file
                         saveImageToStorage(bitmap)
-                        Log.e(TAG, "captured image: $IMAGES_PRODUCED")
                     }
                 }
             } catch (e: Exception) {
@@ -342,16 +338,21 @@ class ScreenShotService : Service() {
             imageOutStream = FileOutputStream(image)
         }
         try {
-            bitmap?.compress(
+            val isCompressed : Boolean? = bitmap?.compress(
                 Bitmap.CompressFormat.JPEG,
                 100,
                 imageOutStream
             )
+            isCompressed?.let {
+                if (it){
+                    IMAGES_PRODUCED += 1
+                    updateNotificationScreenshotCount()
+                    Log.d(TAG, "saveImageToStorage: $IMAGES_PRODUCED")
+                }
+            }
         } finally {
             imageOutStream?.close()
-            IMAGES_PRODUCED += 1
-            updateNotificationScreenshotCount()
-            Log.d(TAG, "saveImageToStorage: $IMAGES_PRODUCED")
+
         }
     }
 
