@@ -11,4 +11,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="screenshots_captured">Screenshots captured</string>
     <string name="tap_record_button_to_start_taking_screen_shots">Tap record button to start taking screen shots</string>
+    <string name="delete">Delete</string>
 </resources>

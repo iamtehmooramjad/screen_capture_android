@@ -23,16 +23,19 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
     override fun initUi() {
         super.initUi()
 
+        bindings.ivBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         CoroutineScope(Dispatchers.IO).launch {
             val images = getAllImages(context)
 
             CoroutineScope(Dispatchers.Main).launch {
                 setRecyclerView(images)
             }
-        }
-
-        bindings.ivBack.setOnClickListener {
-            onBackPressed()
         }
     }
 

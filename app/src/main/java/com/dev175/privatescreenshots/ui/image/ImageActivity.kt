@@ -1,5 +1,6 @@
 package com.dev175.privatescreenshots.ui.image
 
+import android.content.Intent
 import android.view.View
 import com.bumptech.glide.Glide
 import com.dev175.privatescreenshots.R
@@ -30,13 +31,37 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
 
     private fun setOnClickListeners() {
         bindings.shareBtn.setOnClickListener(this)
+        bindings.deleteBtn.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
         when(view?.id){
             bindings.shareBtn.id->{
-
+                if(this::screenshot.isInitialized){
+                    shareImage()
+                }
+            }
+            bindings.deleteBtn.id->{
+                if(this::screenshot.isInitialized){
+                    deleteImage()
+                }
             }
         }
     }
+
+    private fun deleteImage() {
+        val isDeleted = contentResolver.delete(screenshot.uri,null,null)
+        if (isDeleted==1){
+            finish()
+        }
+    }
+
+    private fun shareImage() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_STREAM,screenshot.uri)
+        startActivity(Intent.createChooser(intent, "Share Image"))
+    }
+
+
 }
