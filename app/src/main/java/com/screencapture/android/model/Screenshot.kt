@@ -6,11 +6,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Screenshot(
-    val id : Long,
-    val name : String,
-    val size : String,
-    val date : String,
-    val uri : Uri,
+    val id : Long?=null,
+    val name : String = "",
+    val size : String = "",
+    val date : String = "",
+    val uri : Uri ?= null,
 //    val thumbnail : Bitmap,
     var checked:Boolean = false
 ):Parcelable

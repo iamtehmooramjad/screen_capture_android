@@ -50,7 +50,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
     }
 
     private fun deleteImage() {
-        val isDeleted = contentResolver.delete(screenshot.uri,null,null)
+        val isDeleted = contentResolver.delete(screenshot.uri!!,null,null)
         if (isDeleted==1){
             finish()
         }

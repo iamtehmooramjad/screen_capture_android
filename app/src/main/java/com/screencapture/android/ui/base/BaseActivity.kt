@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
 
-abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes private val layoutResId: Int, ) :
+abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
     AppCompatActivity() {
     protected lateinit var bindings: VB
     protected lateinit var context: Context
