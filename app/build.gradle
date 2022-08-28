@@ -12,7 +12,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.dev175.privatescreenshots"
+        applicationId "com.screencapture.android"
         minSdk 21
         targetSdk 32
         versionCode 1

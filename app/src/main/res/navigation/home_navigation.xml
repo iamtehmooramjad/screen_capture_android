@@ -6,19 +6,19 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.dev175.privatescreenshots.ui.home.HomeFragment"
+        android:name="com.screencapture.android.ui.home.HomeFragment"
         android:label="Home" />
     <activity
         android:id="@+id/screenshotsActivity"
-        android:name="com.dev175.privatescreenshots.ui.screenshots.ScreenshotsActivity"
+        android:name="com.screencapture.android.ui.screenshots.ScreenshotsActivity"
         android:label="Screenshots" />
     <activity
         android:id="@+id/settingsActivity"
-        android:name="com.dev175.privatescreenshots.ui.settings.SettingsActivity"
+        android:name="com.screencapture.android.ui.settings.SettingsActivity"
         android:label="Settings" />
     <activity
         android:id="@+id/imageActivity"
-        android:name="com.dev175.privatescreenshots.ui.image.ImageActivity"
+        android:name="com.screencapture.android.ui.image.ImageActivity"
         android:label="Image" />
 
 </navigation>

@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="data"
-            type="com.dev175.privatescreenshots.model.Screenshot" />
+            type="com.screencapture.android.model.Screenshot" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
