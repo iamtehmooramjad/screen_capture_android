@@ -79,7 +79,8 @@ class HomeActivity : AppCompatActivity() {
                    startActivity(Intent(this,ScreenshotsActivity::class.java))
                 }
                 R.id.settingsActivity->{
-                    startActivity(Intent(this,SettingsActivity::class.java))                }
+                    startActivity(Intent(this,SettingsActivity::class.java))
+                }
             }
             return@setNavigationItemSelectedListener false
 

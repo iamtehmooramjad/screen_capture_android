@@ -11,7 +11,7 @@ object Constants {
      const val SCREENCAP_NAME = "screencap"
      const val RESULT_CODE = "RESULT_CODE"
      const val SCREENSHOTS_FOLDER_NAME = "Screen Capture"
-     const val TIME_IN_MILLIS_FOR_SCREENSHOT_DELAY = 700L
+     const val TIME_IN_MILLIS_FOR_SCREENSHOT_DELAY = 500L
 
      //For Notification
      const val ACTION_START_STOP = "ACTION_START_STOP"

@@ -311,7 +311,7 @@ class ScreenShotService : Service() {
             stopForeground(true)
             stopSelf()
         }
-        return START_NOT_STICKY
+        return START_REDELIVER_INTENT
     }
 
     private fun saveImageToStorage(bitmap: Bitmap?) {

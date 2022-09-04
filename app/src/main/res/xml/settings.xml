@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ListPreference
+        app:defaultValue="150"
+        app:entries="@array/max_images_entries"
+        app:entryValues="@array/max_images_values"
+        app:key="max_images"
+        app:title="@string/max_no_of_images"
+        app:useSimpleSummaryProvider="true" />
+
+
+</PreferenceScreen>

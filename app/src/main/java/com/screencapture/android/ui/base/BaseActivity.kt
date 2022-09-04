@@ -15,7 +15,7 @@ abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes private val layoutR
     protected lateinit var context: Context
 
 
-    open fun initUi() {
+    open fun initUi(savedInstanceState: Bundle?) {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes private val layoutR
         context = this
         bindings = DataBindingUtil.setContentView(this, layoutResId)
         bindings.lifecycleOwner = this
-        initUi()
+        initUi(savedInstanceState)
     }
 
 

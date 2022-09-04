@@ -5,7 +5,6 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_screenshot</item>
         <item name="postSplashScreenTheme">@style/Theme.ScreenCapture</item>
         <item name="windowSplashScreenBackground">@color/blue</item>
-
     </style>
 
 </resources>

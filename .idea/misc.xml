@@ -38,16 +38,19 @@
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/drawable/bg_round_btn.xml" value="0.142" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/drawable/ic_screenshot.xml" value="0.141" />
+        <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/activity_image.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/activity_screenshots.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/activity_settings.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/app_bar_home_navigation.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/content_main_navigation.xml" value="0.2" />
-        <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/item_image.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/nav_header_home_navigation.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/layout/notification_record.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/menu/menu_home.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/xml/file_provider_paths.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/ScreenCapture/app/src/main/res/xml/settings.xml" value="0.2" />
       </map>
     </option>
   </component>

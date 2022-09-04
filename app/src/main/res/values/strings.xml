@@ -7,9 +7,58 @@
     <string name="share">Share</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="share_message">Hey! I found this free app for taking screenshots without letting them know.\nDownload here\nhttps://play.google.com/store/apps/details?id=</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="screenshots_captured">Screenshots captured</string>
     <string name="tap_record_button_to_start_taking_screen_shots">Tap record button to start taking screen shots</string>
     <string name="delete">Delete</string>
+    <string name="create_notification">Create Notification</string>
+    <string name="how_it_works">How it Works?</string>
+    <string name="how_it_works_description">1. Create Notification View by clicking the \'Create Notification\' button above. \n 2. Click on the start button to start taking screenshots in burst mode. \n 3. Click on the stop button to stop taking screenshots. \n 4. Review all taken screenshots.</string>
+    <string name="no_screenshots_taken">No Screenshots taken!</string>
+
+    <string-array name="max_images">
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
+        <item>300</item>
+    </string-array>
+
+
+    <!-- Settings Activity Title -->
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="general">General</string>
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="general_nickname">Your nick name</string>
+    <string name="signature_title">Your signature</string>
+    <string name="game_level">Game level</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="update_auto">Auto update</string>
+
+
+    <!--Google Ads    -->
+    <string name="ads_app_id">ca-app-pub-4081672806980368~1297412133</string>
+    <string name="test_ads_app_id">ca-app-pub-3940256099942544~3347511713</string>
+
+    <!--Ads Id -->
+    <string name="home_banner_ad_id">ca-app-pub-4081672806980368/8601187082</string>
+    <string name="settings_banner_ad_id">ca-app-pub-4081672806980368/2718552430</string>
+    <string name="screenshots_banner_ad_id">ca-app-pub-4081672806980368/4961572399</string>
+    <string name="image_banner_ad_id">ca-app-pub-4081672806980368/4770000704</string>
+    <string name="screenshot_interstitial_ad_id">ca-app-pub-4081672806980368/7807227588</string>
+    <string name="max_no_of_images">Max no of Images</string>
+
 </resources>

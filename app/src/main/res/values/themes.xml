@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="android:statusBarColor">@color/blue</item>
         <item name="android:windowNoTitle">true</item>
         <item name="colorButtonNormal">@color/dark_grey</item>
@@ -59,6 +60,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="fontFamily">@font/mont_semibold</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/title </item>
+    </style>
+
+    <style name="App18SpTextViewStyle.Medium" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/mont_semibold</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/title </item>
     </style>
 

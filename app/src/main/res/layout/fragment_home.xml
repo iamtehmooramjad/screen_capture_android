@@ -50,8 +50,9 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/create_btn"
-            android:text="Start"
+            android:text="@string/create_notification"
             style="@style/App16SpTextViewStyle.Medium"
+            android:background="@color/blue"
             android:textColor="@color/white"
             android:paddingVertical="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,17 +61,40 @@
             android:layout_marginTop="@dimen/_24sdp"
             android:layout_marginHorizontal="@dimen/_24sdp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/stop_btn"
-            android:text="Stop"
-            style="@style/App16SpTextViewStyle.Medium"
-            android:textColor="@color/white"
-            android:paddingVertical="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="parent"
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/how_it_works_tv"
+            style="@style/App22SpTextViewStyle.Bold"
+            android:layout_margin="@dimen/_24sdp"
+            android:text="@string/how_it_works"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_btn"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:layout_marginHorizontal="@dimen/_24sdp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/create_btn" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/steps_tv"
+            style="@style/App18SpTextViewStyle.Medium"
+            android:layout_marginHorizontal="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:lineSpacingExtra="@dimen/_8sdp"
+            android:text="@string/how_it_works_description"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/how_it_works_tv" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
