@@ -86,6 +86,9 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
             requestPermissions.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
+        else{
+            startProjection()
+        }
     }
 
     private fun stopProjection() {

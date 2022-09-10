@@ -5,6 +5,7 @@ import android.app.Service
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.PixelFormat
@@ -55,10 +56,14 @@ class ScreenShotService : Service() {
     private var mHeight = 0
     private var mRotation = 0
     private var mOrientationChangeCallback: OrientationChangeCallback? = null
-    private var resultCode:Int?=null
-    private var data:Intent?=null
+    private var resultCode: Int? = null
+    private var data: Intent? = null
 
-    companion object{
+    private var prefs: SharedPreferences? = null
+    private var defaultMaxImages: Int = 150
+
+    companion object {
+
         private var mMediaProjection: MediaProjection? = null
 
         var IMAGES_PRODUCED = 0
@@ -83,34 +88,39 @@ class ScreenShotService : Service() {
         }
 
         //To Start Media Projection
-        fun getStartProjection(context: Context?):Intent{
+        fun getStartProjection(context: Context?): Intent {
             val intent = Intent(context, ScreenShotService::class.java)
             intent.putExtra(ACTION, START_PROJECTION)
             return intent
         }
 
         //To Stop Media Projection
-        fun getStopProjection(context: Context?):Intent{
+        fun getStopProjection(context: Context?): Intent {
             val intent = Intent(context, ScreenShotService::class.java)
             intent.putExtra(ACTION, STOP_PROJECTION)
             return intent
         }
 
-        private fun isStartProjection(intent: Intent):Boolean{
-            return intent.hasExtra(ACTION) && Objects.equals(intent.getStringExtra(ACTION),
-                START_PROJECTION)
+        private fun isStartProjection(intent: Intent): Boolean {
+            return intent.hasExtra(ACTION) && Objects.equals(
+                intent.getStringExtra(ACTION),
+                START_PROJECTION
+            )
         }
 
 
-        private fun isStopProjection(intent: Intent):Boolean{
-            return intent.hasExtra(ACTION) && Objects.equals(intent.getStringExtra(ACTION),
-                STOP_PROJECTION)
+        private fun isStopProjection(intent: Intent): Boolean {
+            return intent.hasExtra(ACTION) && Objects.equals(
+                intent.getStringExtra(ACTION),
+                STOP_PROJECTION
+            )
         }
 
         private fun isStartCommand(intent: Intent): Boolean {
             return (intent.hasExtra(RESULT_CODE) && intent.hasExtra(DATA)
                     && intent.hasExtra(ACTION) && intent.getStringExtra(ACTION) == START)
         }
+
         private fun isStopCommand(intent: Intent): Boolean {
             return intent.hasExtra(ACTION) && Objects.equals(intent.getStringExtra(ACTION), STOP)
         }
@@ -139,43 +149,54 @@ class ScreenShotService : Service() {
                     // re-create virtual display depending on device width / height
                     createVirtualDisplay()
                 } catch (e: Exception) {
-                    Log.e(TAG, "onOrientationChanged: ",e)
+                    Log.e(TAG, "onOrientationChanged: ", e)
                 }
             }
         }
 
     }
-    inner class ImageAvailableListener : ImageReader.OnImageAvailableListener{
+
+    inner class ImageAvailableListener : ImageReader.OnImageAvailableListener {
 
         override fun onImageAvailable(reader: ImageReader?) {
-            Thread.sleep(TIME_IN_MILLIS_FOR_SCREENSHOT_DELAY)
-            var bitmap: Bitmap? = null
-            try {
-                mImageReader?.acquireLatestImage().use { image ->
-                    if (image != null) {
-                        val planes: Array<Image.Plane> = image.planes
-                        val buffer: ByteBuffer = planes[0].buffer
-                        val pixelStride: Int = planes[0].pixelStride
-                        val rowStride: Int = planes[0].rowStride
-                        val rowPadding = rowStride - pixelStride * mWidth
+            if (IMAGES_PRODUCED < defaultMaxImages) {
+                Thread.sleep(TIME_IN_MILLIS_FOR_SCREENSHOT_DELAY)
+                var bitmap: Bitmap? = null
+                try {
+                    mImageReader?.acquireLatestImage().use { image ->
+                        if (image != null) {
+                            val planes: Array<Image.Plane> = image.planes
+                            val buffer: ByteBuffer = planes[0].buffer
+                            val pixelStride: Int = planes[0].pixelStride
+                            val rowStride: Int = planes[0].rowStride
+                            val rowPadding = rowStride - pixelStride * mWidth
 
-                        // create bitmap
-                        bitmap = Bitmap.createBitmap(
-                            mWidth + rowPadding / pixelStride,
-                            mHeight,
-                            Bitmap.Config.ARGB_8888
-                        )
-                        bitmap?.copyPixelsFromBuffer(buffer)
+                            // create bitmap
+                            bitmap = Bitmap.createBitmap(
+                                mWidth + rowPadding / pixelStride,
+                                mHeight,
+                                Bitmap.Config.ARGB_8888
+                            )
+                            bitmap?.copyPixelsFromBuffer(buffer)
 
-                        // write bitmap to a file
-                        saveImageToStorage(bitmap)
+                            // write bitmap to a file
+                            saveImageToStorage(bitmap)
+                        }
                     }
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "onImageAvailable: ",e)
-            } finally {
+                } catch (e: Exception) {
+                    Log.e(TAG, "onImageAvailable: ", e)
+                } finally {
                     bitmap?.recycle()
+                }
+            } else {
+                /** Max Images Captured */
+                //Start maxLimitIntent Broadcast
+                val maxLimitIntent =
+                    Intent(this@ScreenShotService, NotificationReceiver::class.java)
+                maxLimitIntent.action = Constants.ACTION_MAX_LIMIT
+                sendBroadcast(maxLimitIntent)
             }
+
         }
 
     }
@@ -215,25 +236,30 @@ class ScreenShotService : Service() {
     override fun onCreate() {
         super.onCreate()
 
+        prefs = getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
+        val maxImages = prefs?.getString(Constants.MAX_IMAGES, Constants.MAX_IMAGES_DEFAULT)
+        maxImages?.let {
+            defaultMaxImages = it.toInt()
+        }
+
         // create store dir
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
-        }
-        else{
+        } else {
 
             val imagesDir =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                    .toString()+"/"+Constants.SCREENSHOTS_FOLDER_NAME
-                val storeDirectory = File(imagesDir)
-                if (!storeDirectory.exists()) {
-                    val success: Boolean = storeDirectory.mkdirs()
-                    if (!success) {
-                        Log.e(TAG, "failed to create file storage directory.")
-                        stopForeground(true)
-                        stopSelf()
-                    }
+                    .toString() + "/" + Constants.SCREENSHOTS_FOLDER_NAME
+            val storeDirectory = File(imagesDir)
+            if (!storeDirectory.exists()) {
+                val success: Boolean = storeDirectory.mkdirs()
+                if (!success) {
+                    Log.e(TAG, "failed to create file storage directory.")
+                    stopForeground(true)
+                    stopSelf()
                 }
+            }
 
         }
 
@@ -258,11 +284,11 @@ class ScreenShotService : Service() {
         }
     }
 
-     private fun startMediaProjection() {
-         val mpManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-         if (mMediaProjection==null && resultCode!=null && data!=null){
-             mMediaProjection = mpManager.getMediaProjection(resultCode!!, data!!)
-         }
+    private fun startMediaProjection() {
+        val mpManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+        if (mMediaProjection == null && resultCode != null && data != null) {
+            mMediaProjection = mpManager.getMediaProjection(resultCode!!, data!!)
+        }
         if (mMediaProjection != null) {
             // display metrics
             mDensity = Resources.getSystem().displayMetrics.densityDpi
@@ -296,14 +322,11 @@ class ScreenShotService : Service() {
             val resultCode = intent.getIntExtra(RESULT_CODE, Activity.RESULT_CANCELED)
             val data = intent.getParcelableExtra<Intent>(DATA)
             startProjection(resultCode, data!!)
-        }
-        else if (isStartProjection(intent)){
+        } else if (isStartProjection(intent)) {
             startMediaProjection()
-        }
-        else if (isStopProjection(intent)){
+        } else if (isStopProjection(intent)) {
             stopProjection()
-        }
-        else if (isStopCommand(intent)) {
+        } else if (isStopCommand(intent)) {
             stopProjection()
             stopForeground(true)
             stopSelf()
@@ -317,34 +340,37 @@ class ScreenShotService : Service() {
     private fun saveImageToStorage(bitmap: Bitmap?) {
         var imageOutStream: OutputStream? = null
         val name = getFileName()
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val values = ContentValues()
             values.put(MediaStore.Images.Media.DISPLAY_NAME, name)
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-            values.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES+"/"+Constants.SCREENSHOTS_FOLDER_NAME)
+            values.put(
+                MediaStore.Images.Media.RELATIVE_PATH,
+                Environment.DIRECTORY_PICTURES + "/" + Constants.SCREENSHOTS_FOLDER_NAME
+            )
             val uri: Uri? =
                 contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             uri?.let {
-               imageOutStream = contentResolver.openOutputStream(it)
+                imageOutStream = contentResolver.openOutputStream(it)
             }
-             Log.d(TAG, "saveImageToStorage: if $uri")
+            Log.d(TAG, "saveImageToStorage: if $uri")
         } else {
             val imagesDir =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                    .toString()+"/"+Constants.SCREENSHOTS_FOLDER_NAME
+                    .toString() + "/" + Constants.SCREENSHOTS_FOLDER_NAME
 
-             Log.d(TAG, "saveImageToStorage: else $imagesDir")
+            Log.d(TAG, "saveImageToStorage: else $imagesDir")
             val image = File(imagesDir, name)
             imageOutStream = FileOutputStream(image)
         }
         try {
-            val isCompressed : Boolean? = bitmap?.compress(
+            val isCompressed: Boolean? = bitmap?.compress(
                 Bitmap.CompressFormat.JPEG,
                 100,
                 imageOutStream
             )
             isCompressed?.let {
-                if (it){
+                if (it) {
                     IMAGES_PRODUCED += 1
                     updateNotificationScreenshotCount()
                     Log.d(TAG, "saveImageToStorage: $IMAGES_PRODUCED")
@@ -357,13 +383,13 @@ class ScreenShotService : Service() {
     }
 
     private fun updateNotificationScreenshotCount() {
-        val intent = Intent(this,NotificationReceiver::class.java)
+        val intent = Intent(this, NotificationReceiver::class.java)
         intent.action = Constants.ACTION_COUNT
         intent.putExtra(Constants.COUNT, IMAGES_PRODUCED)
         sendBroadcast(intent)
     }
 
-    private fun stopProjection(){
+    private fun stopProjection() {
         mHandler?.let {
             it.post {
                 if (mMediaProjection != null) {
@@ -372,7 +398,6 @@ class ScreenShotService : Service() {
             }
         }
     }
-
 
 
 }

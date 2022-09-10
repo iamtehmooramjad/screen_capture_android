@@ -8,6 +8,7 @@ import com.screencapture.android.service.ScreenShotService
 import com.screencapture.android.service.ScreenShotService.Companion.isMediaProjectionRunning
 import com.screencapture.android.utils.Constants.ACTION_COUNT
 import com.screencapture.android.utils.Constants.ACTION_GALLERY
+import com.screencapture.android.utils.Constants.ACTION_MAX_LIMIT
 import com.screencapture.android.utils.Constants.ACTION_START_STOP
 import com.screencapture.android.utils.Constants.ACTION_STOP
 import com.screencapture.android.utils.Constants.COUNT
@@ -41,6 +42,12 @@ class NotificationReceiver : BroadcastReceiver(){
             ACTION_COUNT->{
                 val count =  intent.extras?.get(COUNT) as Int
                 NotificationUtils.updateNotificationCount(context,count)
+            }
+            ACTION_MAX_LIMIT->{
+                if(isMediaProjectionRunning){
+                    NotificationUtils.updateNotification(context,R.drawable.ic_start)
+                    context?.startService(ScreenShotService.getStopProjection(context))
+                }
             }
 
         }

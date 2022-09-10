@@ -33,19 +33,19 @@ object NotificationUtils {
         //Start Stop Intent
         val startStopIntent = Intent(context, NotificationReceiver::class.java)
         startStopIntent.action = ACTION_START_STOP
-        val pendingStartStopIntent = PendingIntent.getBroadcast(context, 0,startStopIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingStartStopIntent = PendingIntent.getBroadcast(context, 0,startStopIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         remoteViews?.setOnClickPendingIntent(R.id.start_stop_iv, pendingStartStopIntent)
 
         //Stop Service
         val stopIntent = Intent(context,NotificationReceiver::class.java)
         stopIntent.action = ACTION_STOP
-        val pendingStopIntent = PendingIntent.getBroadcast(context, 0,stopIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingStopIntent = PendingIntent.getBroadcast(context, 0,stopIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         remoteViews?.setOnClickPendingIntent(R.id.close_iv, pendingStopIntent)
 
         //Open Screenshots
         val galleryIntent = Intent(context, ScreenshotsActivity::class.java)
         galleryIntent.action = ACTION_GALLERY
-        val pendingGalleryIntent = PendingIntent.getActivity(context, 0,galleryIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingGalleryIntent = PendingIntent.getActivity(context, 0,galleryIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         remoteViews?.setOnClickPendingIntent(R.id.gallery_iv, pendingGalleryIntent)
 
         notification= NotificationCompat.Builder(context, CHANNEL_ID)
