@@ -6,9 +6,11 @@ import android.content.Intent
 import com.screencapture.android.R
 import com.screencapture.android.service.ScreenShotService
 import com.screencapture.android.service.ScreenShotService.Companion.isMediaProjectionRunning
+import com.screencapture.android.utils.Constants.ACTION
 import com.screencapture.android.utils.Constants.ACTION_COUNT
 import com.screencapture.android.utils.Constants.ACTION_GALLERY
 import com.screencapture.android.utils.Constants.ACTION_MAX_LIMIT
+import com.screencapture.android.utils.Constants.ACTION_SETTINGS
 import com.screencapture.android.utils.Constants.ACTION_START_STOP
 import com.screencapture.android.utils.Constants.ACTION_STOP
 import com.screencapture.android.utils.Constants.COUNT
@@ -37,6 +39,9 @@ class NotificationReceiver : BroadcastReceiver(){
                 }
             }
             ACTION_GALLERY->{
+                context?.startService(ScreenShotService.getStopIntent(context))
+            }
+            ACTION_SETTINGS->{
                 context?.startService(ScreenShotService.getStopIntent(context))
             }
             ACTION_COUNT->{

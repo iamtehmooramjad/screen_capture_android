@@ -19,6 +19,7 @@ object Constants {
      const val ACTION_START_STOP = "ACTION_START_STOP"
      const val ACTION_STOP = "ACTION_STOP"
      const val ACTION_GALLERY = "ACTION_GALLERY"
+     const val ACTION_SETTINGS = "ACTION_SETTINGS"
      const val START_PROJECTION = "START_PROJECTION"
      const val STOP_PROJECTION = "STOP_PROJECTION"
      const val ACTION_COUNT = "ACTION_COUNT"

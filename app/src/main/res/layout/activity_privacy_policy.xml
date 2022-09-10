@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:fitsSystemWindows="true"
+                android:theme="@style/Theme.Care20.AppBarOverlay"
+                app:elevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="18dp">
+
+
+                    <ImageButton
+                        android:id="@+id/iv_back"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_back_arrow"
+                        app:elevation="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_toolbar_title"
+                        style="@style/App18SpTextViewStyle"
+                        android:gravity="center"
+                        android:text="@string/privacy_policy"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:background="@color/grey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.appbar.AppBarLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_bar">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:orientation="vertical"
+       >
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App18SpTextViewStyle.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/screen_capture_privacy_policy" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/privacy_policy_about" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App18SpTextViewStyle.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/information_we_collect" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/personal_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/collect_personal_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/non_personal_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/collect_non_personal" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/information_you_provide" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/collect_you_provide" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/how_we_use_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/personal_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/use_personal_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/non_personal_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/use_non_personal_information" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/legal_reasons" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/legal_reasons_desc" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/security" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/security_desc" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/content_rating" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/content_rating_desc" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/contact_us" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/contact_us_desc" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/change_in_privacy_policies" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/App16SpTextViewStyle.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:breakStrategy="balanced"
+                    app:lineHeight="@dimen/_24sdp"
+                    android:text="@string/change_in_privacy_desc" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</layout>

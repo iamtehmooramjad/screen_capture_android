@@ -7,6 +7,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.screencapture.android.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
 
@@ -18,6 +21,13 @@ class ScreenshotApplication : Application() {
         setUpPreferences()
         initializeAds()
         createNotificationChannel()
+
+
+        if (isGooglePlayServicesAvailable()) {
+            FirebaseAnalytics.getInstance(this).setAnalyticsCollectionEnabled(true)
+        } else {
+            //show user proper error
+        }
     }
 
     private fun setUpPreferences() {
@@ -47,6 +57,15 @@ class ScreenshotApplication : Application() {
             )
             manager.createNotificationChannel(channel)
         }
+    }
+
+    private fun isGooglePlayServicesAvailable(): Boolean {
+        val googleApiAvailability = GoogleApiAvailability.getInstance()
+        val status = googleApiAvailability.isGooglePlayServicesAvailable(this)
+        if (status != ConnectionResult.SUCCESS) {
+            return false
+        }
+        return true
     }
 
     companion object {

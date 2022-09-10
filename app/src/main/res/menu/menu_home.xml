@@ -30,7 +30,7 @@
 
     <group android:id="@+id/privacyPolicy">
         <item
-            android:id="@+id/appPrivacyPolicy"
+            android:id="@+id/privacyPolicyActivity"
             android:title="@string/privacy_policy" />
     </group>
 

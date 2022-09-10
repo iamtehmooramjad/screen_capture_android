@@ -143,6 +143,8 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
         else{
             bindings.noScreenshotsTv.visibility = View.GONE
         }
+        Log.d(TAG, "setRecyclerView: $images")
+        Log.d(TAG, "setRecyclerView: ${images.size}")
         adapter.items = images.toMutableList()
 
         bindings.rvGallery.adapter = adapter

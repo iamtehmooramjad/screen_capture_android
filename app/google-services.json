@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "362541423544",
+    "project_id": "screencapture-bdb62",
+    "storage_bucket": "screencapture-bdb62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362541423544:android:4d886d9964b55822f84d4d",
+        "android_client_info": {
+          "package_name": "com.screencapture.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362541423544-tha8v9e0kkf38oa981a33358mok5je7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjFr_7D7RlG9TWWlTMwXmYVcOSWvcxy84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362541423544-tha8v9e0kkf38oa981a33358mok5je7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

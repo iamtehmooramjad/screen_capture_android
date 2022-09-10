@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.screencapture.android">
 
-    <permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -13,14 +14,15 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.App.Starting">
+
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/test_ads_app_id"/>
+            android:value="@string/test_ads_app_id" />
 
         <activity
             android:name=".ui.navigation.HomeActivity"
@@ -31,27 +33,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.screenshots.ScreenshotsActivity"
-            android:theme="@style/Theme.ScreenCapture"/>
-        <activity android:name=".ui.image.ImageActivity"
-            android:theme="@style/Theme.ScreenCapture"/>
-        <activity android:name=".ui.settings.SettingsActivity"
-            android:theme="@style/Theme.ScreenCapture"/>
-        <receiver android:name=".receiver.NotificationReceiver"/>
+        <activity
+            android:name=".ui.screenshots.ScreenshotsActivity"
+            android:theme="@style/Theme.ScreenCapture" />
+        <activity
+            android:name=".ui.image.ImageActivity"
+            android:theme="@style/Theme.ScreenCapture" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:theme="@style/Theme.ScreenCapture" />
+
+        <activity
+            android:name=".ui.privacypolicy.PrivacyPolicyActivity"
+            android:theme="@style/Theme.ScreenCapture" />
+
+        <receiver android:name=".receiver.NotificationReceiver" />
+
         <service
             android:name=".service.ScreenShotService"
             android:foregroundServiceType="mediaProjection" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:grantUriPermissions="true"
+            android:authorities="${applicationId}"
             android:exported="false"
-            android:authorities="${applicationId}">
-
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider_paths"/>
-
+                android:resource="@xml/file_provider_paths" />
         </provider>
     </application>
 

@@ -12,7 +12,9 @@ import com.screencapture.android.R
 import com.screencapture.android.ScreenshotApplication.Companion.CHANNEL_ID
 import com.screencapture.android.receiver.NotificationReceiver
 import com.screencapture.android.ui.screenshots.ScreenshotsActivity
+import com.screencapture.android.ui.settings.SettingsActivity
 import com.screencapture.android.utils.Constants.ACTION_GALLERY
+import com.screencapture.android.utils.Constants.ACTION_SETTINGS
 import com.screencapture.android.utils.Constants.ACTION_START_STOP
 import com.screencapture.android.utils.Constants.ACTION_STOP
 
@@ -47,6 +49,15 @@ object NotificationUtils {
         galleryIntent.action = ACTION_GALLERY
         val pendingGalleryIntent = PendingIntent.getActivity(context, 0,galleryIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         remoteViews?.setOnClickPendingIntent(R.id.gallery_iv, pendingGalleryIntent)
+
+
+        //Open Settings
+        val settingsIntent = Intent(context, SettingsActivity::class.java)
+        settingsIntent.action = ACTION_SETTINGS
+        val pendingSettingsIntent = PendingIntent.getActivity(context, 0,settingsIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        remoteViews?.setOnClickPendingIntent(R.id.settings_iv, pendingSettingsIntent)
+
+
 
         notification= NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher_round)

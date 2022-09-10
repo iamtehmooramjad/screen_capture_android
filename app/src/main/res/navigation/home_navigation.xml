@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_navigation"
     app:startDestination="@id/homeFragment">
 
@@ -20,5 +21,11 @@
         android:id="@+id/imageActivity"
         android:name="com.screencapture.android.ui.image.ImageActivity"
         android:label="Image" />
+    <activity
+        android:id="@+id/privacyPolicyActivity"
+        android:name="com.screencapture.android.ui.privacypolicy.PrivacyPolicyActivity"
+        android:label="Privacy Policy"
+        tools:layout="@layout/activity_privacy_policy" />
+
 
 </navigation>

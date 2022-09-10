@@ -22,6 +22,7 @@ import com.screencapture.android.ui.settings.SettingsActivity
 import com.screencapture.android.utils.fadeVisibility
 import com.screencapture.android.utils.showShortToast
 import com.google.android.material.navigation.NavigationView
+import com.screencapture.android.ui.privacypolicy.PrivacyPolicyActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,7 +58,8 @@ class HomeActivity : AppCompatActivity() {
             setOf(
                 R.id.homeFragment,
                 R.id.screenshotsActivity,
-                R.id.settingsActivity
+                R.id.settingsActivity,
+                R.id.privacyPolicyActivity
             ), drawerLayout
         )
 
@@ -72,8 +74,8 @@ class HomeActivity : AppCompatActivity() {
                 R.id.shareAppLink->{
                     shareAppLink()
                 }
-                R.id.appPrivacyPolicy->{
-                    showShortToast("Privacy Policy")
+                R.id.privacyPolicyActivity->{
+                    startActivity(Intent(this,PrivacyPolicyActivity::class.java))
                 }
                 R.id.screenshotsActivity->{
                    startActivity(Intent(this,ScreenshotsActivity::class.java))
@@ -92,6 +94,7 @@ class HomeActivity : AppCompatActivity() {
             if (destination.id == R.id.homeFragment) {
                 bindings.appBarMainNavigation.toolbar.fadeVisibility(View.GONE,0)
             }
+
         }
 
 
