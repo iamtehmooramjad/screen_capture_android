@@ -19,9 +19,10 @@ import com.screencapture.android.utils.Constants
 import java.io.File
 
 
-class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image), View.OnClickListener {
+class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image),
+    View.OnClickListener {
 
-    lateinit var screenshot : Screenshot
+    lateinit var screenshot: Screenshot
 
     override fun initUi(savedInstanceState: Bundle?) {
         super.initUi(savedInstanceState)
@@ -33,7 +34,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
     private fun setUpAdView() {
         val adRequest = AdRequest.Builder().build()
         bindings.adView.loadAd(adRequest)
-        bindings.adView.adListener = object: AdListener() {
+        bindings.adView.adListener = object : AdListener() {
             override fun onAdClicked() {
                 // Code to be executed when the user clicks on an ad.
             }
@@ -43,7 +44,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
                 // to the app after tapping on an ad.
             }
 
-            override fun onAdFailedToLoad(adError : LoadAdError) {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
                 // Code to be executed when an ad request fails.
                 bindings.adView.loadAd(adRequest)
             }
@@ -67,6 +68,7 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
     private fun getImage() {
         intent?.extras?.let {
             screenshot = it.get(Constants.IMAGE) as Screenshot
+            bindings.image.setImageURI(screenshot.uri)
             Glide.with(this)
                 .load(screenshot.uri)
                 .into(bindings.image)
@@ -79,14 +81,14 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
     }
 
     override fun onClick(view: View?) {
-        when(view?.id){
-            bindings.shareBtn.id->{
-                if(this::screenshot.isInitialized){
+        when (view?.id) {
+            bindings.shareBtn.id -> {
+                if (this::screenshot.isInitialized) {
                     shareImage()
                 }
             }
-            bindings.deleteBtn.id->{
-                if(this::screenshot.isInitialized){
+            bindings.deleteBtn.id -> {
+                if (this::screenshot.isInitialized) {
                     deleteImage()
                 }
             }
@@ -94,17 +96,15 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
     }
 
     private fun deleteImage() {
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q)
-        {
-            val isDeleted = contentResolver.delete(screenshot.uri!!,null,null)
-            if (isDeleted==1) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val isDeleted = contentResolver.delete(screenshot.uri!!, null, null)
+            if (isDeleted == 1) {
                 finish()
             }
-        }
-        else{
+        } else {
             val isDeleted = screenshot.uri?.toFile()?.delete()
             isDeleted?.let {
-                if (it){
+                if (it) {
                     finish()
                 }
             }
@@ -113,21 +113,20 @@ class ImageActivity : BaseActivity<ActivityImageBinding>(R.layout.activity_image
     }
 
     private fun shareImage() {
-       val intent = Intent(Intent.ACTION_SEND)
+        val intent = Intent(Intent.ACTION_SEND)
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
         intent.type = "image/*"
 
         var uri = screenshot.uri
-        if (Build.VERSION.SDK_INT<Build.VERSION_CODES.Q){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             uri?.path?.let {
                 val file = File(it)
                 uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID, file)
             }
-        }
-        else {
+        } else {
             uri = screenshot.uri
         }
-        intent.putExtra(Intent.EXTRA_STREAM,uri)
+        intent.putExtra(Intent.EXTRA_STREAM, uri)
         startActivity(Intent.createChooser(intent, "Share Image"))
     }
 

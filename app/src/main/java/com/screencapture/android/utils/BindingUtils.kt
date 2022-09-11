@@ -10,15 +10,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 object BindingUtils {
 
 
-
     @JvmStatic
     @BindingAdapter("bind:imageUri")
     fun loadImage(iv: ImageView, uri: Uri?) {
         Glide
             .with(iv.context)
             .load(uri)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(iv)
     }
 }

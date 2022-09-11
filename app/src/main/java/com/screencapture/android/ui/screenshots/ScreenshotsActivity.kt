@@ -20,8 +20,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
-class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.activity_screenshots) {
+class ScreenshotsActivity :
+    BaseActivity<ActivityScreenshotsBinding>(R.layout.activity_screenshots) {
 
     @Inject
     lateinit var adapter: ScreenshotsAdapter
@@ -29,6 +31,7 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
     private var mInterstitialAd: InterstitialAd? = null
 
     private val TAG = "ScreenshotsActivity"
+
 
     override fun initUi(savedInstanceState: Bundle?) {
         super.initUi(savedInstanceState)
@@ -39,27 +42,33 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
         }
     }
 
+
     private fun setUpInterstitialAd() {
-        var adRequest = AdRequest.Builder().build()
+        val adRequest = AdRequest.Builder().build()
+        val adIdScreenshots = resources.getString(R.string.screenshot_interstitial_ad_id)
 
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d("TAG", adError.toString())
-                mInterstitialAd = null
-            }
-
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                Log.d("TAG", "Ad was loaded.")
-                mInterstitialAd = interstitialAd
-                mInterstitialAd?.let {
-                    mInterstitialAd?.show(this@ScreenshotsActivity)
+        InterstitialAd.load(
+            this,
+            adIdScreenshots,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d("TAG", adError.toString())
+                    mInterstitialAd = null
                 }
 
-            }
-        })
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d("TAG", "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                    mInterstitialAd?.let {
+                        mInterstitialAd?.show(this@ScreenshotsActivity)
+                    }
+
+                }
+            })
 
 
-        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdClicked() {
                 // Called when a click is recorded for an ad.
                 Log.d(TAG, "Ad was clicked.")
@@ -93,6 +102,7 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
 
     override fun onResume() {
         super.onResume()
+
         CoroutineScope(Dispatchers.IO).launch {
             val images = getAllImages(context)
 
@@ -102,10 +112,11 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
         }
     }
 
+
     private fun setUpAdView() {
         val adRequest = AdRequest.Builder().build()
         bindings.adView.loadAd(adRequest)
-        bindings.adView.adListener = object: AdListener() {
+        bindings.adView.adListener = object : AdListener() {
             override fun onAdClicked() {
                 // Code to be executed when the user clicks on an ad.
             }
@@ -115,7 +126,7 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
                 // to the app after tapping on an ad.
             }
 
-            override fun onAdFailedToLoad(adError : LoadAdError) {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
                 // Code to be executed when an ad request fails.
                 bindings.adView.loadAd(adRequest)
             }
@@ -137,10 +148,9 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
     }
 
     private fun setRecyclerView(images: List<Screenshot>) {
-        if(images.isEmpty()){
+        if (images.isEmpty()) {
             bindings.noScreenshotsTv.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             bindings.noScreenshotsTv.visibility = View.GONE
         }
         Log.d(TAG, "setRecyclerView: $images")
@@ -149,9 +159,9 @@ class ScreenshotsActivity  : BaseActivity<ActivityScreenshotsBinding>(R.layout.a
 
         bindings.rvGallery.adapter = adapter
 
-        adapter.listener = {_, item, _ ->
-            val intent = Intent(this,ImageActivity::class.java)
-            intent.putExtra(Constants.IMAGE,item)
+        adapter.listener = { _, item, _ ->
+            val intent = Intent(this, ImageActivity::class.java)
+            intent.putExtra(Constants.IMAGE, item)
             startActivity(intent)
         }
     }
