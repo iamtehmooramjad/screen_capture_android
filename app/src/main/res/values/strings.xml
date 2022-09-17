@@ -81,11 +81,17 @@
     <string name="image_banner_ad_id">ca-app-pub-4081672806980368/4770000704</string>
     <string name="screenshot_interstitial_ad_id">ca-app-pub-4081672806980368/7807227588</string>
     <string name="banner_test_ad_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstitial_test_ad_id">ca-app-pub-3940256099942544/1033173712</string>
 
     <!--Google Ads    -->
     <string name="ads_app_id">ca-app-pub-4081672806980368~1297412133</string>
-    <string name="test_ads_app_id">ca-app-pub-3940256099942544~3347511713</string>
 
+
+<!--    Testing -->
+<!--    <string name="home_banner_ad_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="settings_banner_ad_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="screenshots_banner_ad_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="image_banner_ad_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="screenshot_interstitial_ad_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ads_app_id">ca-app-pub-3940256099942544~3347511713</string>-->
 
 </resources>

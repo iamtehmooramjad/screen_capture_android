@@ -6,7 +6,13 @@
 
     </data>
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -69,20 +75,17 @@
 
 
             </com.google.android.material.appbar.AppBarLayout>
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/app_bar">
+
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
                 android:orientation="vertical"
-       >
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_bar"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/App18SpTextViewStyle.Bold"
@@ -96,8 +99,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/privacy_policy_about" />
+                    android:text="@string/privacy_policy_about"
+                    app:lineHeight="@dimen/_24sdp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/App18SpTextViewStyle.Bold"
@@ -121,8 +124,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/collect_personal_information" />
+                    android:text="@string/collect_personal_information"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -139,8 +142,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/collect_non_personal" />
+                    android:text="@string/collect_non_personal"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -157,8 +160,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/collect_you_provide" />
+                    android:text="@string/collect_you_provide"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -183,8 +186,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/use_personal_information" />
+                    android:text="@string/use_personal_information"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -201,8 +204,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/use_non_personal_information" />
+                    android:text="@string/use_non_personal_information"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -219,8 +222,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/legal_reasons_desc" />
+                    android:text="@string/legal_reasons_desc"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -237,8 +240,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/security_desc" />
+                    android:text="@string/security_desc"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -255,8 +258,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/content_rating_desc" />
+                    android:text="@string/content_rating_desc"
+                    app:lineHeight="@dimen/_24sdp" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -272,8 +275,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/contact_us_desc" />
+                    android:text="@string/contact_us_desc"
+                    app:lineHeight="@dimen/_24sdp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/App16SpTextViewStyle.Bold"
@@ -288,13 +291,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:breakStrategy="balanced"
-                    app:lineHeight="@dimen/_24sdp"
-                    android:text="@string/change_in_privacy_desc" />
+                    android:text="@string/change_in_privacy_desc"
+                    app:lineHeight="@dimen/_24sdp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
-            </ScrollView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+    </ScrollView>
 
 
 </layout>
