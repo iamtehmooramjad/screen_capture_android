@@ -23,14 +23,21 @@ object NotificationUtils {
     private val NOTIFICATION_ID = 103
     private var notification: Notification ?= null
     private var remoteViews: RemoteViews ?= null
+    private var collapsedRemoteViews: RemoteViews ?= null
 
     fun showNotification(context: Context) : Pair<Int, Notification>{
         val  notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(context)
 
         remoteViews = RemoteViews(
             context.packageName,
-            R.layout.notification_record
+            R.layout.notification_record_expanded
         )
+
+        collapsedRemoteViews = RemoteViews(
+            context.packageName,
+            R.layout.notification_record_collapsed
+        )
+
 
         //Start Stop Intent
         val startStopIntent = Intent(context, NotificationReceiver::class.java)
@@ -61,7 +68,9 @@ object NotificationUtils {
 
         notification= NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher_round)
-            .setCustomContentView(remoteViews)
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+            .setCustomContentView(collapsedRemoteViews)
+            .setCustomBigContentView(remoteViews)
             .setOnlyAlertOnce(true)
             .setOngoing(true)
             .build()
